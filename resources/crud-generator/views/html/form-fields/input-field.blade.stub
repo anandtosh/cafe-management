@@ -1,0 +1,8 @@
+<div class="input-group input-group-sm">
+    <div class="input-group-prepend">
+        <div class="input-group-text">
+        <i class="fa fa-circle"></i>
+        </div>
+    </div>
+        <input class="form-control form-control-sm" name="%%itemName%%" type="%%fieldType%%" id="%%itemName%%" value="{{ isset($%%crudNameSingular%%->%%itemName%%) ? $%%crudNameSingular%%->%%itemName%% : ''}}" %%required%%>
+</div>

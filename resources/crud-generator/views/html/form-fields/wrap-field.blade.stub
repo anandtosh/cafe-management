@@ -1,0 +1,8 @@
+<div class="form-group row {{ $errors->has('%1$s') ? 'is-validated' : ''}}">
+    <label for="%1$s" class="col-4 col-form-label col-form-sm">{{ %2$s }}</label>
+    <div class="col-8">
+    %3$s
+    </div>
+    {!! $errors->first('%1$s', '<p class="help-block">:message</p>') !!}
+</div>
+

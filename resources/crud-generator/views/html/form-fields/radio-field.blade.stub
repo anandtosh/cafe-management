@@ -1,0 +1,8 @@
+<div class="custom-control custom-radio custom-control-inline">
+    <input name="%%itemName%%" id="%%itemName%%_1" type="radio" class="custom-control-input" value="1" {{ (isset($%%crudNameSingular%%) && 1 == $%%crudNameSingular%%->%%itemName%%) ? 'checked' : '' }}>
+    <label for="%%itemName%%_1" class="custom-control-label">Yes</label>
+</div>
+<div class="custom-control custom-radio custom-control-inline">
+    <input name="%%itemName%%" id="%%itemName%%_0" type="radio" class="custom-control-input" value="0" @if (isset($%%crudNameSingular%%)) {{ (0 == $%%crudNameSingular%%->%%itemName%%) ? 'checked' : '' }} @else {{ 'checked' }} @endif>
+    <label for="%%itemName%%_0" class="custom-control-label">No</label>
+</div>

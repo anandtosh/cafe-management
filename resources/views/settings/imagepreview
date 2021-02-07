@@ -1,0 +1,27 @@
+ @section('adminlte_endjs')
+    <script>
+        function filePreview(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $('#imgpreview').attr('src',e.target.result);
+                    const size = (input.files[0].size /1024).toFixed(2);
+                    if (size>100) {
+                        Swal.fire('error','Too Large File');
+                    }
+                    $('#imgsize').text(size+' Kb');
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+        $('#image').change(function (e) {
+            e.preventDefault();
+            filePreview(this);
+        });
+    </script>
+@endsection
+
+<div class="container border p-0" style="width:100px;height:140px">
+<img  id="imgpreview" alt="..." class="img-fluid w-100 h-100">
+Image Size <strong><h6 id="imgsize"></h6></strong>
+</div>

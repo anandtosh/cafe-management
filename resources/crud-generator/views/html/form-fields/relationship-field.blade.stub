@@ -1,0 +1,11 @@
+<select class="select2-ajax form-control"
+    name="%%itemName%%"
+data-route="{{url('admin/ajax')}}"
+data-method="post"
+data-function="%%function%%"
+data-path="%%table%%"
+data-column="%%column%%"
+data-filtercol="%%filtercol%%"
+data-filterval="%%filterval%%"
+%%required%%>
+</select>
