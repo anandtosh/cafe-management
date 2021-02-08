@@ -30,6 +30,7 @@
                                     </tr>
                                     <tr><th> Applied On </th><td> {{ $order->applied_on }} </td></tr>
                                     <tr><th> Resolved On </th><td> {{ $order->resolved_on }} </td></tr>
+                                    <tr><th> Inquiry PIN </th><td> {{ $order->pin }} </td></tr>
                                     <tr><th> Current Status </th><td> {{ $order->current_status }} </td></tr>
                                     <tr><th> Description </th><td> {{ $order->description }} </td></tr>
                                     <tr><th> Uploads </th><td><a class="btn btn-sm btn-info" href="{{ Storage::url($order->uploads) }}">View</a></td></tr>

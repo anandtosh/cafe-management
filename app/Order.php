@@ -25,8 +25,8 @@ class Order extends Model
      *
      * @var array
      */
-    protected $fillable = ['applied_on','resolved_on','current_status','admin_upload',
-    'description','uploads','amount','franchise_id','fiscal_id','requestwork_id'];
+    protected $fillable = ['applied_on','resolved_on','current_status','admin_upload','pin',
+    'description','uploads','amount','franchise_id','fiscal_id','requestwork_id','customer_name'];
 
     public function franchise()
     {

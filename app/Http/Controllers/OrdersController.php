@@ -8,6 +8,8 @@ use App\Http\Requests;
 use App\Order;
 use App\Franchise;
 use Illuminate\Http\Request;
+use App\Exports\OrderExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class OrdersController extends Controller
 {
@@ -28,6 +30,7 @@ class OrdersController extends Controller
                 ->orWhere('resolved_on', 'LIKE', "%$keyword%")
                 ->orWhere('current_status', 'LIKE', "%$keyword%")
                 ->orWhere('description', 'LIKE', "%$keyword%")
+                ->orWhere('customer_name', 'LIKE', "%$keyword%")
                 ->orWhere('uploads', 'LIKE', "%$keyword%")
                 ->orWhere('amount', 'LIKE', "%$keyword%")
                 ->orWhere('created_at', 'LIKE', "%$keyword%")
@@ -57,7 +60,7 @@ class OrdersController extends Controller
             if(Franchise::find(session('franchise_id'))->opening-Order::where('franchise_id',session('franchise_id'))->pluck('amount')->sum()+\App\Recharge::where('franchise_id',session('franchise_id'))->pluck('amount')->sum()<=0)
             {
                 return back()->with('error','Credit Limit Exceeded');
-            } 
+            }
         }
         return view('orders.create');
     }
@@ -167,6 +170,10 @@ class OrdersController extends Controller
         return view('orders.wallet');
     }
 
-
+    public function export()
+    {
+        $this->authorize('create_franchise');
+        return Excel::download(new OrderExport, 'orders.xlsx');
+    }
 
 }

@@ -227,6 +227,12 @@ return [
                     'url'=>'admin/settings',
                 ],
                 [
+                    'text' => 'Distributors',
+                    'icon'=>'fa fa-users',
+                    'url'=> 'admin/distributors',
+                    'can'=> 'view_distributors'
+                ],
+                [
                     'text' => 'Franchisee',
                     'icon'=>'fa fa-users',
                     'url'=> 'admin/franchises',
@@ -298,7 +304,7 @@ return [
             'url'=>'admin/tickets',
             'can'=>'view_tickets',
         ],
-        
+
     ],
 
     /*

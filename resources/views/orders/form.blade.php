@@ -24,6 +24,21 @@ required>
     {!! $errors->first('requestwork_id', '<p class="help-block">:message</p>') !!}
 </div>
 
+<div class="form-group row {{ $errors->has('customer_name') ? 'is-validated' : ''}}">
+    <label for="customer_name" class="col-4 col-form-label col-form-sm">{{ 'Customer Name' }}</label>
+    <div class="col-8">
+    <div class="input-group input-group-sm">
+    <div class="input-group-prepend">
+        <div class="input-group-text">
+        {{-- <i class="fa fa-circle"></i> --}}
+            <i class="fas fa-user    "></i>
+        </div>
+    </div>
+        <input class="form-control " name="customer_name" type="text" id="customer_name" value="{{ isset($order->customer_name) ? $order->customer_name : ''}}" required>
+</div>
+</div>
+</div>
+
 <div class="form-group row {{ $errors->has('applied_on') ? 'is-validated' : ''}}">
     <label for="applied_on" class="col-4 col-form-label col-form-sm">{{ 'Applied On' }}</label>
     <div class="col-8">
@@ -121,6 +136,13 @@ required>
 
     </div>
     {!! $errors->first('amount', '<p class="help-block">:message</p>') !!}
+</div>
+
+<div class="form-group row {{ $errors->has('pin') ? 'is-validated' : ''}}">
+    <label for="pin" class="col-4 col-form-label col-form-sm">{{ 'Inquiry PIN' }}</label>
+    <div class="col-8">
+    <input class="form-control" readonly name="pin" type="number" id="pin" value="{{ isset($order->pin) ? $order->pin : rand(1000,9999)}}">
+    </div>
 </div>
 
 {{-- <div class="form-group row {{ $errors->has('franchise_id') ? 'is-validated' : ''}}">

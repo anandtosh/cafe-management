@@ -76,6 +76,7 @@ Route::group(['prefix' => 'admin'], function () {
     Route::resource('ledgers', 'LedgersController');
     Route::resource('configs', 'ConfigsController');
     Route::resource('franchises', 'FranchisesController');
+    Route::resource('distributors', 'DistributorsController');
     Route::resource('expenses', 'ExpensesController');
     Route::resource('requestworks', 'RequestworksController');
     Route::resource('orders', 'OrdersController');
@@ -97,6 +98,12 @@ Route::group(['prefix' => 'admin'], function () {
     Route::post('receipt/sales', 'SalesController@postreceipt');
     Route::post('status/sales', 'SalesController@poststatus');
     Route::get('wallet','OrdersController@wallet');
+
+    Route::get('latest-updates',function(){
+        return view('latest-updates');
+    });
+
+    Route::get('order/export','OrdersController@export');
 
 });
 

@@ -3,7 +3,7 @@
 @section('content')
     <div class="container">
         <div class="row">
- 
+
 
             <div class="col-md-12">
                 <div class="card">
@@ -12,6 +12,11 @@
                     @can('create_orders')
                         <a href="{{ url('/admin/orders/create') }}" class="btn btn-success btn-sm" title="Add New order">
                             <i class="fa fa-plus" aria-hidden="true"></i> Add New
+                        </a>
+                    @endcan
+                    @can('create_franchise')
+                        <a href="{{ url('/admin/order/export') }}" class="btn btn-danger btn-sm" title="Export Orders">
+                            <i class="fas fa-file-excel" aria-hidden="true"></i> Excel Export (All)
                         </a>
                     @endcan
                         <form method="GET" action="{{ url('/admin/orders') }}" accept-charset="UTF-8" class="form-inline my-2 my-lg-0 float-right" role="search">
@@ -48,6 +53,7 @@
                                         <th>Work</th>
                                         <th>Current Status</th>
                                         <th>Description</th>
+                                        <th>Customer Name</th>
                                         {{-- <th>Uploads</th> --}}
                                         <th>Amount</th>
                                         <th>Actions</th>
@@ -62,6 +68,7 @@
                                         <td>{{ $item->requestwork->name }}</td>
                                         <td>{{ $item->current_status }}</td>
                                         <td>{{ $item->description }}</td>
+                                        <td>{{ $item->customer_name }}</td>
                                         {{-- <td>
                                         <a class="btn btn-sm btn-info" href="{{ Storage::url($item->uploads) }}">View</a>
                                         </td> --}}
