@@ -230,7 +230,7 @@ return [
                     'text' => 'Distributors',
                     'icon'=>'fa fa-users',
                     'url'=> 'admin/distributors',
-                    'can'=> 'view_distributors'
+                    'can'=> 'view_franchises'
                 ],
                 [
                     'text' => 'Franchisee',

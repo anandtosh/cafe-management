@@ -19,7 +19,7 @@ class DistributorsController extends Controller
      */
     public function index(Request $request)
     {
-        $this->authorize('view_distributor');
+        $this->authorize('view_franchises');
         $keyword = $request->get('search');
         $perPage = 25;
 
@@ -45,7 +45,7 @@ class DistributorsController extends Controller
      */
     public function create()
     {
-        $this->authorize('create_distributors');
+        $this->authorize('view_franchises');
         return view('distributors.create');
     }
 
@@ -94,7 +94,7 @@ class DistributorsController extends Controller
      */
     public function show($id)
     {
-        $this->authorize('show_distributors');
+        $this->authorize('view_franchises');
         $distributors = Distributor::findOrFail($id);
 
         return view('distributors.show', compact('distributors'));
@@ -109,7 +109,7 @@ class DistributorsController extends Controller
      */
     public function edit($id)
     {
-        $this->authorize('edit_distributors');
+        $this->authorize('view_franchises');
         $distributors = Distributor::findOrFail($id);
 
         return view('distributors.edit', compact('distributors'));
@@ -154,7 +154,7 @@ class DistributorsController extends Controller
      */
     public function destroy($id)
     {
-        $this->authorize('delete_distributors');
+        $this->authorize('view_franchises');
         Distributor::destroy($id);
 
         return redirect('admin/distributors')->with('success', 'Distributor deleted!');
