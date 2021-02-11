@@ -14,7 +14,7 @@
                             <i class="fa fa-plus" aria-hidden="true"></i> Add New
                         </a>
                     @endcan
-                    @can('create_franchise')
+                    @can('create_franchises')
                         <a href="{{ url('/admin/order/export') }}" class="btn btn-danger btn-sm" title="Export Orders">
                             <i class="fas fa-file-excel" aria-hidden="true"></i> Excel Export (All)
                         </a>
