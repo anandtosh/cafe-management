@@ -172,7 +172,7 @@ class OrdersController extends Controller
 
     public function export()
     {
-        $this->authorize('create_franchise');
+        $this->authorize('create_franchises');
         return Excel::download(new OrderExport, 'orders.xlsx');
     }
 
