@@ -13,7 +13,16 @@
 
 
 Route::get('/', function () {
-    return redirect()->route('login');
+    return view('frontend.home');
+});
+Route::get('/services', function () {
+    return view('frontend.services');
+});
+Route::get('/aboutus', function () {
+    return view('frontend.aboutus');
+});
+Route::get('/contactus', function () {
+    return view('frontend.contactus');
 });
 
 Auth::routes();
