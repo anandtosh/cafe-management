@@ -92,6 +92,12 @@
             .information {
                 color: black;
             }
+            p{
+                color: black;
+            }
+            h1{
+                color: black;
+            }
 
             .btn {
                 font-weight: bold;
