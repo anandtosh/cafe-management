@@ -31,14 +31,14 @@
                             <table class="table">
                                 <thead>
                                     <tr>
-                                        <th>#</th><th>Description</th><th>Attatchment</th><th>Status</th><th>Admin Remark</th><th>Admin Attatchment</th><th>Actions</th>
+                                        <th>#</th><th>Description</th><th>Status</th><th>Response</th><th>Response Attatchment</th><th>Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                 @foreach($tickets as $item)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $item->description }}</td><td>{{ $item->attatchment }}</td><td>{{ $item->status }}</td><td>{{ $item->admin_remark }}</td><td>{{ $item->admin_attatchment }}</td>
+                                        <td>{{ $item->description }}</td><td>{{ $item->status }}</td><td>{{ $item->admin_remark }}</td><td>{{ $item->admin_attatchment }}</td>
                                         <td>
                                         @can('view_tickets')
                                             <a href="{{ url('/admin/tickets/' . $item->id) }}" title="View ticket"><button class="btn btn-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i> View</button></a>

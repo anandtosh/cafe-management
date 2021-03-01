@@ -299,7 +299,7 @@ return [
             'can'=>'view_expenses',
         ],
         [
-            'text' => 'Tickets',
+            'text' => 'Complaints',
             'icon' =>'fas fa-ticket-alt',
             'url'=>'admin/tickets',
             'can'=>'view_tickets',

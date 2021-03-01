@@ -176,4 +176,14 @@ class OrdersController extends Controller
         return Excel::download(new OrderExport, 'orders.xlsx');
     }
 
+    public function orderStatus(Request $request)
+    {
+        $order = Order::find($request->order_id);
+        if($order){
+            return response()->json(['order'=>$order]);
+        }else{
+            return response()->json(['failed'=>'Order Not found']);
+        }
+    }
+
 }

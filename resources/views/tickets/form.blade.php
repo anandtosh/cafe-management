@@ -24,21 +24,7 @@
     {!! $errors->first('attatchment', '<p class="help-block">:message</p>') !!}
 </div>
 
-<div class="form-group row {{ $errors->has('status') ? 'is-validated' : ''}}">
-    <label for="status" class="col-4 col-form-label col-form-sm">{{ 'Status' }}</label>
-    <div class="col-8">
-    <div class="input-group input-group-sm">
-    <div class="input-group-prepend">
-        <div class="input-group-text">
-        <i class="fa fa-circle"></i>
-        </div>
-    </div>
-        <input class="form-control" name="status" type="text" id="status" value="{{ isset($ticket->status) ? $ticket->status : ''}}" >
-</div>
-
-    </div>
-    {!! $errors->first('status', '<p class="help-block">:message</p>') !!}
-</div>
+<input class="form-control" name="status" type="hidden" id="status" value="{{ isset($ticket->status) ? $ticket->status : 'PENDING'}}" >
 
 @hasanyrole('Developer|Admin')
 
@@ -70,24 +56,6 @@
 
 @endhasanyrole
 
-<div class="form-group row {{ $errors->has('sale_id') ? 'is-validated' : ''}}">
-    <label for="sale_id" class="col-4 col-form-label col-form-sm">{{ 'Sale Id' }}</label>
-    <div class="col-8">
-    <select class="select2-ajax form-control"
-    name="sale_id"
-data-route="{{url('admin/ajax')}}"
-data-method="post"
-data-function="select2relation"
-data-path="sales"
-data-column="id"
-data-filtercol=""
-data-filterval=""
->
-</select>
-
-    </div>
-    {!! $errors->first('sale_id', '<p class="help-block">:message</p>') !!}
-</div>
 
 <div class="form-group d-none row {{ $errors->has('franchise_id') ? 'is-validated' : ''}}">
     <label for="franchise_id" class="col-4 col-form-label col-form-sm">{{ 'Franchise' }}</label>

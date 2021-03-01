@@ -114,5 +114,7 @@ Route::group(['prefix' => 'admin'], function () {
 
     Route::get('order/export','OrdersController@export');
 
+    Route::get('order/status','OrdersController@orderStatus')->name('order-status');
+
 });
 

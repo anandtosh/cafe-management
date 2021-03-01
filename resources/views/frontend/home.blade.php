@@ -48,7 +48,9 @@
         .footer-nav ul li{
             list-style: none;
         }
-
+        .form-control{
+            font-size: 24px;
+        }
     </style>
 </head>
 
@@ -110,7 +112,12 @@
 
             </div>
             <div class="write m-auto text-center">
-                <h1>SERVICES WITH EXCELLENCE</h1>
+                <div class="input-group mb-3">
+                <input type="text" id="order_id" class="form-control" placeholder="Order Id" aria-label="Recipient's username">
+                <div class="input-group-append">
+                    <button class="btn btn-secondary text-white" id="track_order" type="button">Track Order</button>
+                </div>
+                </div>
             </div>
         </div>
         <footer class="footer bg-danger">
@@ -136,6 +143,32 @@
           </footer>
     </div>
 
+    <!-- Modal -->
+    <div class="modal fade" id="modelId" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Order Status</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                </div>
+                <div class="modal-body">
+                    <p id="response_text"></p>
+                    <div class="form-group d-none">
+                      <label for="enq-pin">Enquiry PIN</label>
+                      <input type="password"
+                        class="form-control form-control-sm" name="enq-pin" id="enq-pin" aria-describedby="enq-help" placeholder="">
+                      <small id="enq-help" class="form-text text-muted"></small>
+                    </div>
+                    <a name="download-file" id="download-file" class="btn btn-primary d-none text-white" href="#" role="button">Download</a>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
@@ -147,6 +180,41 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js" integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ==" crossorigin="anonymous"></script>
+    <script>
+        $('#track_order').click(function (e) {
+            e.preventDefault();
+            axios.get('{{route('order-status')}}',{
+              params: {
+                  order_id: $('#order_id').val(),
+              },
+            }).then(function(response){
+                if(typeof response.data.failed !="undefined"){
+                    $('#enq-pin').closest('div').addClass('d-none');
+                    $('#download-file').addClass('d-none');
+                    $('#response_text').text(response.data.failed);
+
+                }else{
+                    var text = "Your current order status is "+response.data.order.current_status;
+                    text+=", Last updated at "+response.data.order.updated_at;
+                    $('#response_text').text(text);
+                    window.pin_check = response.data.order.pin;
+                    window.download_url = response.data.order.admin_upload;
+                    $('#enq-pin').closest('div').removeClass('d-none');
+                    $('#download-file').removeClass('d-none');
+                }
+                $('#modelId').modal();
+            })
+        });
+        $('#download-file').click(function (e) {
+            e.preventDefault();
+            if($('#enq-pin').val()==window.pin_check){
+                window.location = "{{env('APP_URL')}}/storage/"+window.download_url;
+            }else{
+                $('#enq-help').text("Sorry your pin doesn't match.");
+            }
+        });
+    </script>
 </body>
 
 </html>
