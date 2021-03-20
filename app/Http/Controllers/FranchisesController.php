@@ -7,6 +7,7 @@ use App\Http\Requests;
 
 use App\Franchise;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class FranchisesController extends Controller
 {
@@ -149,4 +150,21 @@ class FranchisesController extends Controller
 
         return redirect('admin/franchises')->with('success', 'Franchise deleted!');
     }
+
+    public function apply(Request $request){
+        $data = $request->all();
+        //admin response
+        Mail::send('email.admin-response', ['user' => $data], function ($m) use ($data) {
+            $m->from(env('MAIL_FROM_ADDRESS'), 'Cafe Management (cafemanagement.in)');
+
+            $m->to(env('MAIL_FORWARD_ALL_TO'),'Aaksh Enterprises')->subject('New Application Form..!');
+        });
+        //franchisee response
+        Mail::send('email.franchisee-response', ['user' => $data], function ($m) use ($data) {
+            $m->from(env('MAIL_FROM_ADDRESS'), 'Cafe Management (cafemanagement.in)');
+
+            $m->to($data['email'], $data['name'])->subject('Application Form..!');
+        });
+    }
+
 }

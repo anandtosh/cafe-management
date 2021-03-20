@@ -30,9 +30,9 @@
             min-height: 80px;
             /* background-color: rgb(10, 94, 143); */
         }
-        a.btn {
+        .btn {
             font-weight: bold;
-            color: rgb(214, 25, 0);
+            color: red;
         }
         h1{
             font-size: 60px;
@@ -90,7 +90,7 @@
                             <a class="btn" href="contactus">CONTACT US</a>
                         </li>
                         <li class="nav-item">
-                            <a class="btn" data-toggle="modal" data-target="#applyFranchisee" href="#">APPLY FRANCHISEE</a>
+                            <a class="btn" href="apply-franchisee">Apply Franchisee</a>
                         </li>
                         <li class="nav-item">
                             <a class="btn" href="login">LOGIN</a>
@@ -147,65 +147,6 @@
     </div>
 
     <!-- Modal -->
-    <div class="modal fade" id="modelId" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Order Status</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                </div>
-                <div class="modal-body">
-                    <p id="response_text"></p>
-                    <div class="form-group d-none">
-                      <label for="enq-pin">Enquiry PIN</label>
-                      <input type="password"
-                        class="form-control form-control-sm" name="enq-pin" id="enq-pin" aria-describedby="enq-help" placeholder="">
-                      <small id="enq-help" class="form-text text-muted"></small>
-                    </div>
-                    <a name="download-file" id="download-file" class="btn btn-primary d-none text-white" href="#" role="button">Download</a>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Modal -->
-    <div class="modal fade" id="applyFranchisee" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Apply For Franchisee</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                </div>
-                <div class="modal-body">
-                    <div class="form-group">
-                      <label for="f-name">Name</label>
-                      <input type="text"
-                        class="form-control" name="f-name" id="f-name" aria-describedby="helpId" placeholder="">
-                    </div>
-                    <div class="form-group">
-                      <label for="f-email">Email-ID</label>
-                      <input type="text"
-                        class="form-control" name="f-email" id="f-email" aria-describedby="helpId" placeholder="">
-                    </div>
-                    <div class="form-group">
-                      <label for="f-contact">Contact Number</label>
-                      <input type="text"
-                        class="form-control" name="f-contact" id="f-contact" aria-describedby="helpId" placeholder="">
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary submit-apply">Submit Form</button>
-                </div>
-            </div>
-        </div>
-    </div>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
@@ -217,58 +158,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js" integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ==" crossorigin="anonymous"></script>
-    <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-    <script>
-        $('#track_order').click(function (e) {
-            e.preventDefault();
-            axios.get('{{route('order-status')}}',{
-              params: {
-                  order_id: $('#order_id').val(),
-              },
-            }).then(function(response){
-                if(typeof response.data.failed !="undefined"){
-                    $('#enq-pin').closest('div').addClass('d-none');
-                    $('#download-file').addClass('d-none');
-                    $('#response_text').text(response.data.failed);
-
-                }else{
-                    var text = "Your current order status is "+response.data.order.current_status;
-                    text+=", Last updated at "+response.data.order.updated_at;
-                    $('#response_text').text(text);
-                    window.pin_check = response.data.order.pin;
-                    window.download_url = response.data.order.admin_upload;
-                    $('#enq-pin').closest('div').removeClass('d-none');
-                    $('#download-file').removeClass('d-none');
-                }
-                $('#modelId').modal();
-            })
-        });
-        $('#download-file').click(function (e) {
-            e.preventDefault();
-            if($('#enq-pin').val()==window.pin_check){
-                window.location = "{{env('APP_URL')}}/storage/"+window.download_url;
-            }else{
-                $('#enq-help').text("Sorry your pin doesn't match.");
-            }
-        });
-        $('.submit-apply').click(function (e) {
-            e.preventDefault();
-            axios.post("{{route('apply-franchisee')}}", {
-                name: $('#f-name').val(),
-                email: $('#f-email').val(),
-                contact: $('#f-contact').val(),
-            }).then(function(response){
-                $('#applyFranchisee').modal('hide');
-                Swal.fire({
-                icon: 'success',
-                title: 'Thank you...',
-                text: 'You have successfully submitted the franchise application.',
-                footer: 'Our team will contact you shortly.'
-                })
-            })
-        });
-    </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js" integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ==" crossorigin="anonymous"></script>
 </body>
 
 </html>

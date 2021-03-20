@@ -24,6 +24,7 @@ Route::get('/aboutus', function () {
 Route::get('/contactus', function () {
     return view('frontend.contactus');
 });
+Route::post('/apply-franchisee','FranchisesController@apply')->name('apply-franchisee');
 
 Auth::routes();
 
