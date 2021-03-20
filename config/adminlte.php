@@ -304,6 +304,11 @@ return [
             'url'=>'admin/tickets',
             'can'=>'view_tickets',
         ],
+        [
+            'text' => 'Recharge Online',
+            'icon' =>'fas fa-dollar-sign',
+            'url'=>'admin/online-recharge',
+        ],
 
     ],
 

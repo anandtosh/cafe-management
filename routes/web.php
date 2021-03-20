@@ -78,7 +78,7 @@ Application Tested Dynamic Routes
 /*
     Application Routes Defined Below
 */
-Route::group(['prefix' => 'admin'], function () {
+Route::group(['prefix' => 'admin','middleware'=>'auth'], function () {
     Route::resource('settings', 'SettingsController');
     Route::resource('menus', 'MenusController');
     Route::resource('works', 'WorksController');
@@ -115,6 +115,8 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('order/export','OrdersController@export');
 
     Route::get('order/status','OrdersController@orderStatus')->name('order-status');
+
+    Route::get('online-recharge','RechargesController@showQRCode')->name('online-recharge');
 
 });
 

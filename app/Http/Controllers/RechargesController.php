@@ -55,7 +55,7 @@ class RechargesController extends Controller
 			'amount' => 'required'
 		]);
         $requestData = $request->all();
-        
+
         Recharge::create($requestData);
 
         return redirect('admin/recharges')->with('success', 'Recharge added!');
@@ -105,7 +105,7 @@ class RechargesController extends Controller
 			'amount' => 'required'
 		]);
         $requestData = $request->all();
-        
+
         $recharge = Recharge::findOrFail($id);
         $recharge->update($requestData);
 
@@ -125,5 +125,10 @@ class RechargesController extends Controller
         Recharge::destroy($id);
 
         return redirect('admin/recharges')->with('success', 'Recharge deleted!');
+    }
+
+    public function showQRCode()
+    {
+        return view('recharges.qr-code');
     }
 }
