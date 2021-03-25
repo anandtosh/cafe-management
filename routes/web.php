@@ -118,6 +118,7 @@ Route::group(['prefix' => 'admin','middleware'=>'auth'], function () {
     Route::get('order/status','OrdersController@orderStatus')->name('order-status');
 
     Route::get('online-recharge','RechargesController@showQRCode')->name('online-recharge');
+    Route::post('recharge-receipt','RechargesController@receiptPost')->name('recharge-receipt-post');
 
 });
 

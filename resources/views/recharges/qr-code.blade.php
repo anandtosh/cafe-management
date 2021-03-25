@@ -14,9 +14,51 @@
                                   <img class="" src="{{asset('5f6577f1-04bc-4b2a-843f-49b3e0104cc0.png')}}" alt="qr-code" width="300">
                             </a>
                         </div>
+                        <div class="row mt-3">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="transaction_id">Transaction ID</label>
+                                    <input type="text"
+                                    class="form-control" name="transaction_id" id="transaction_id" placeholder="">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="upload_file">Upload</label>
+                                    <input type="file" class="form-control-file" name="upload_file" id="upload_file" placeholder="" aria-describedby="fileHelpId">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <button type="submit" class="btn btn-primary upload-form mt-4">Submit</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 @endsection
+
+@push('js')
+    <script>
+        $('.upload-form').click(function (e) {
+            e.preventDefault();
+            if($('#transaction_id').val()==''){
+                if($('#upload_file').val()==''){
+                    alert('Please upload receipt');
+                }else{
+                    alert('Please enter transaction ID');
+                }
+            }else{
+                let data = new FormData();
+                data.append('file', document.getElementById('upload_file').files[0]);
+                data.append('transaction_id', document.getElementById('transaction_id').value);
+                axios.post('{{route("recharge-receipt-post")}}',data,{
+                    headers: {
+                        'Content-Type': 'multipart/form-data'
+                    }
+                });
+            }
+        });
+    </script>
+@endpush

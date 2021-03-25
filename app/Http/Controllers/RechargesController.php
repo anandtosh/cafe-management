@@ -131,4 +131,9 @@ class RechargesController extends Controller
     {
         return view('recharges.qr-code');
     }
+
+    public function receiptPost(Request $request){
+
+    }
+
 }
