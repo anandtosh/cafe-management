@@ -143,7 +143,7 @@ class OrdersController extends Controller
             $requestData['admin_upload'] = $request->file('admin_upload')
                 ->store('uploads', 'public');
         }
-        $requestData['current_status']='DONE';
+        // $requestData['current_status']='DONE';
         $order = Order::findOrFail($id);
         $order->update($requestData);
 

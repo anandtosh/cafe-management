@@ -61,7 +61,7 @@
                                 </thead>
                                 <tbody>
                                 @foreach($orders as $item)
-                                    <tr>
+                                    <tr class="bg-{{$item->current_status=='DONE'?'warning':($item->current_status=='DELIVERED'?'success':'danger')}}">
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ $item->applied_on }}</td>
                                         <td>{{ $item->franchise->name }}</td>
@@ -124,7 +124,16 @@
                                                 <input readonly id="admin_upload"
                                                 name="admin_upload" type="file" class="form-control-file">
                                             </div>
-                                          </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-form-label col-4" for="current_status">Status</label>
+                                            <div class="col-8">
+                                            <select class="form-control" name="current_status" id="current_status" required>
+                                              <option value="DONE">DONE</option>
+                                              <option value="DELIVERED">DELIVERED</option>
+                                            </select>
+                                            </div>
+                                        </div>
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

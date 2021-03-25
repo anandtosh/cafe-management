@@ -51,6 +51,12 @@
         .form-control{
             font-size: 24px;
         }
+        .round-head{
+            background: red;
+            margin-right: 15px;
+            color: white!important;
+            border-radius: 20px;
+        }
     </style>
 </head>
 
@@ -90,10 +96,10 @@
                             <a class="btn" href="contactus">CONTACT US</a>
                         </li>
                         <li class="nav-item">
-                            <a class="btn" data-toggle="modal" data-target="#applyFranchisee" href="#">APPLY FRANCHISEE</a>
+                            <a class="btn round-head" data-toggle="modal" data-target="#applyFranchisee" href="#">APPLY FRANCHISEE</a>
                         </li>
                         <li class="nav-item">
-                            <a class="btn" href="login">LOGIN</a>
+                            <a class="btn round-head" href="login">LOGIN</a>
                         </li>
                         <!-- <li class="nav-item dropdown">
                               <a class="nav-link dropdown-toggle" href="#" id="dropdownId" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
