@@ -63,7 +63,7 @@
                                 @foreach($orders as $item)
                                     <tr class="bg-{{$item->current_status=='DONE'?'warning':($item->current_status=='DELIVERED'?'success':'danger')}}">
                                         <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $item->applied_on }}</td>
+                                        <td>{{ \Carbon\Carbon::parse($item->applied_on)->format('d-M-Y, h:m') }}</td>
                                         <td>{{ $item->franchise->name }}</td>
                                         <td>{{ $item->requestwork->name }}</td>
                                         <td>{{ $item->current_status }}</td>
