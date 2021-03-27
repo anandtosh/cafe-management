@@ -111,7 +111,7 @@
                     </li>
                     @if(DB::table('recharge_receipts')->where('status','PENDING')->count()>0)
                     <li class="nav-item">
-                        <button class="btn">
+                        <button class="btn btn-danger">
                             {{DB::table('recharge_receipts')->where('status','PENDING')->count(). ' Pending Recharge'}}
                         </button>
                     </li>

@@ -2,6 +2,11 @@
 
 @section('adminlte_css_pre')
     <link rel="stylesheet" href="{{ asset('vendor/icheck-bootstrap/icheck-bootstrap.min.css') }}">
+    <style>
+        body{
+            background: url(https://www.henryharvin.com/blog/wp-content/uploads/2020/12/wp3950085.png)!important;
+        }
+    </style>
 @stop
 
 @section('adminlte_css')
