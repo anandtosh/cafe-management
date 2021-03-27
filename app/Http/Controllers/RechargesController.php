@@ -139,13 +139,43 @@ class RechargesController extends Controller
             $file = $request->file('file')
                 ->store('uploads', 'public');
         }
-        DB::insert([
+        DB::table('recharge_receipts')->insert([
             'transaction_id'=>$request->transaction_id,
             'amount' => $request->amount,
             'file' => $file,
             'status' => 'PENDING',
-            'franchisee_id' => $franchise_id
+            'franchisee_id' => $franchise_id,
+            'created_at' => \Carbon\Carbon::now(),
+            'updated_at' => \Carbon\Carbon::now(),
         ]);
+        return response()->json(['state'=>'reload']);
+    }
+
+    public function approve($id){
+        if(Auth::user()->hasRole('Admin|Developer')){
+            DB::table('recharge_receipts')->where('id',$id)->update([
+                'status' => 'APPROVED',
+            ]);
+        }
+        return redirect()->route('online-recharge');
+    }
+
+    public function failed($id){
+        if(Auth::user()->hasRole('Admin|Developer')){
+            DB::table('recharge_receipts')->where('id',$id)->update([
+                'status' => 'FAILED',
+            ]);
+        }
+        return redirect()->route('online-recharge');
+    }
+
+    public function pending($id){
+        if(Auth::user()->hasRole('Admin|Developer')){
+            DB::table('recharge_receipts')->where('id',$id)->update([
+                'status' => 'PENDING',
+            ]);
+        }
+        return redirect()->route('online-recharge');
     }
 
 }

@@ -119,6 +119,9 @@ Route::group(['prefix' => 'admin','middleware'=>'auth'], function () {
 
     Route::get('online-recharge','RechargesController@showQRCode')->name('online-recharge');
     Route::post('recharge-receipt','RechargesController@receiptPost')->name('recharge-receipt-post');
+    Route::get('recharge-approve/{id}','RechargesController@approve')->name('recharge-receipt-approve');
+    Route::get('recharge-failed/{id}','RechargesController@failed')->name('recharge-receipt-failed');
+    Route::get('recharge-pending/{id}','RechargesController@pending')->name('recharge-receipt-pending');
 
 });
 
