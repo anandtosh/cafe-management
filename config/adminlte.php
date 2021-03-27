@@ -263,6 +263,12 @@ return [
             'url'=>'admin/wallet',
         ],
         [
+            'text' => 'Add Money',
+            'icon' =>'fas fa-dollar-sign',
+            'url'=>'admin/online-recharge',
+        ],
+
+        [
             'text' => 'Works',
             'icon' =>'fas fa-list',
             'url'=>'admin/works',
@@ -303,11 +309,6 @@ return [
             'icon' =>'fas fa-ticket-alt',
             'url'=>'admin/tickets',
             'can'=>'view_tickets',
-        ],
-        [
-            'text' => 'Add Money',
-            'icon' =>'fas fa-dollar-sign',
-            'url'=>'admin/online-recharge',
         ],
 
     ],
