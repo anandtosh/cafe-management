@@ -109,6 +109,13 @@
                                 @endforeach
                             </ul>
                     </li>
+                    @if(DB::table('recharge_receipts')->where('status','PENDING')->count()>0)
+                    <li class="nav-item">
+                        <button class="btn">
+                            {{DB::table('recharge_receipts')->where('status','PENDING')->count(). ' Pending Recharge'}}
+                        </button>
+                    </li>
+                    @endif
                     @endhasanyrole
                     @each('adminlte::partials.menu-item-top-nav', $adminlte->menu(), 'item')
                     @yield('content_top_nav_left')

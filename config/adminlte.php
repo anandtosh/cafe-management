@@ -305,7 +305,7 @@ return [
             'can'=>'view_tickets',
         ],
         [
-            'text' => 'Recharge',
+            'text' => 'Add Money',
             'icon' =>'fas fa-dollar-sign',
             'url'=>'admin/online-recharge',
         ],
