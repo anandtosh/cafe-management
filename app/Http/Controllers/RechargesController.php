@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests;
-
+use Auth;
+use DB;
 use App\Recharge;
 use Illuminate\Http\Request;
 
@@ -133,7 +134,18 @@ class RechargesController extends Controller
     }
 
     public function receiptPost(Request $request){
-
+        $franchise_id = Auth::user()->franchise_id;
+        if ($request->hasFile('file')) {
+            $file = $request->file('file')
+                ->store('uploads', 'public');
+        }
+        DB::insert([
+            'transaction_id'=>$request->transaction_id,
+            'amount' => $request->amount,
+            'file' => $file,
+            'status' => 'PENDING',
+            'franchisee_id' => $franchise_id
+        ]);
     }
 
 }

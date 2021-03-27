@@ -15,20 +15,27 @@
                             </a>
                         </div>
                         <div class="row mt-3">
-                            <div class="col-md-4">
+                            <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="transaction_id">Transaction ID</label>
                                     <input type="text"
                                     class="form-control" name="transaction_id" id="transaction_id" placeholder="">
                                 </div>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="amount">Amount</label>
+                                    <input type="number" min="0" step="1"
+                                    class="form-control" name="amount" id="amount" placeholder="">
+                                </div>
+                            </div>
+                            <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="upload_file">Upload</label>
                                     <input type="file" class="form-control-file" name="upload_file" id="upload_file" placeholder="" aria-describedby="fileHelpId">
                                 </div>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-3">
                                 <button type="submit" class="btn btn-primary upload-form mt-4">Submit</button>
                             </div>
                         </div>
@@ -53,6 +60,7 @@
                 let data = new FormData();
                 data.append('file', document.getElementById('upload_file').files[0]);
                 data.append('transaction_id', document.getElementById('transaction_id').value);
+                data.append('amount', document.getElementById('amount').value);
                 axios.post('{{route("recharge-receipt-post")}}',data,{
                     headers: {
                         'Content-Type': 'multipart/form-data'
