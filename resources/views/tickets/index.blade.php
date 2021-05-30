@@ -31,13 +31,20 @@
                             <table class="table">
                                 <thead>
                                     <tr>
-                                        <th>#</th><th>Description</th><th>Status</th><th>Response</th><th>Response Attatchment</th><th>Actions</th>
+                                        <th>#</th>
+                                        <th>Franshise</th>
+                                        <th>Description</th>
+                                        <th>Status</th>
+                                        <th>Response</th>
+                                        <th>Response Attatchment</th>
+                                        <th>Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                 @foreach($tickets as $item)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
+                                        <td>{{ $item->franchise->name."(".$item->franchise->contact.")" }}</td>
                                         <td>{{ $item->description }}</td><td>{{ $item->status }}</td><td>{{ $item->admin_remark }}</td><td>{{ $item->admin_attatchment }}</td>
                                         <td>
                                         @can('view_tickets')
