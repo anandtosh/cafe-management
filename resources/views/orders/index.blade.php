@@ -95,7 +95,7 @@
                                 @endforeach
                                 </tbody>
                             </table>
-                            <div class="pagination-wrapper"> {!! $orders->appends(['search' => Request::get('search')])->render() !!} </div>
+                            <div class="pagination-wrapper"> {!! $orders->appends(['search' => Request::get('search'),'franchise' => Request::get('franchise')])->render() !!} </div>
                         </div>
                         <div class="modal fade" id="respond" tabindex="-1" role="dialog" aria-labelledby="respondid" aria-hidden="true">
                             <div class="modal-dialog" role="document">
